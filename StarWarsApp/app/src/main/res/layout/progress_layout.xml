@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="isVisible"
+            type="Boolean" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/loader"
+        android:visibility="@{isVisible == true ? View.VISIBLE : View.GONE}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:layout_marginTop="@dimen/large_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+</layout>

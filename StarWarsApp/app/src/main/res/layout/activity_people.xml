@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.example.starwarsapp.presentation.viewmodel.PeopleViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.activity.PeopleActivity">
+
+        <EditText
+            android:id="@+id/search_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:layout_toStartOf="@id/submit"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="@dimen/normal_margin"
+            android:hint="@string/search_hint" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/search_edit_text"
+            android:layout_alignBottom="@id/search_edit_text"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:text="@string/submit" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/search_edit_text"
+            android:layout_above="@id/progressLayout" />
+
+        <TextView
+            android:id="@+id/no_results"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_edit_text"
+            android:gravity="center"
+            android:padding="@dimen/large_margin"
+            android:text="@string/no_results"/>
+
+        <include
+            android:id="@+id/progressLayout"
+            layout="@layout/progress_layout"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isVisible="@{viewModel.progressVisible}" />
+
+    </RelativeLayout>
+</layout>
