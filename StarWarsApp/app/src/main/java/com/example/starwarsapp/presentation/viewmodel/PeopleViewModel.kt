@@ -1,34 +1,17 @@
-package com.example.starwarsapp.presentation.ui.viewmodel
+package com.example.starwarsapp.presentation.viewmodel
 
-import androidx.lifecycle.*
-import com.example.starwarsapp.domain.usecase.GetPeopleUseCase
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.starwarsapp.domain.model.PersonModel
-import com.example.starwarsapp.data.remote.util.ApiResponse
-import com.example.starwarsapp.data.remote.util.ApiSuccessResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.starwarsapp.domain.usecase.GetNextPeopleUseCase
+import kotlinx.coroutines.flow.Flow
 
 class PeopleViewModel(
-    private val getPeopleUseCase: GetPeopleUseCase
+    private val getNextPeopleUseCase: GetNextPeopleUseCase
 ) : BaseViewModel() {
 
-    private var peopleSource: LiveData<ApiResponse<List<PersonModel>>> = MutableLiveData()
-
-    private val _peopleModel = MediatorLiveData<List<PersonModel>>()
-    val peopleModel: LiveData<List<PersonModel>> get() = _peopleModel
-
-    fun submitSearch(search: String) = viewModelScope.launch {
-        _peopleModel.removeSource(peopleSource)
-        withContext(Dispatchers.IO) { peopleSource = getPeopleUseCase(search) }
-
-        _peopleModel.addSource(peopleSource) { apiResponse ->
-            processResponse(apiResponse)
-            when(apiResponse) {
-                is ApiSuccessResponse -> {
-                    apiResponse.data.let { _peopleModel.value = it }
-                }
-            }
-        }
+    fun getNextPeople(search: String): Flow<PagingData<PersonModel>> {
+        return getNextPeopleUseCase(search).cachedIn(viewModelScope)
     }
 }

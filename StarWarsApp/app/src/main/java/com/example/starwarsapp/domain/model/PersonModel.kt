@@ -1,4 +1,4 @@
-package com.example.starwarsapp
+package com.example.starwarsapp.domain.model
 
 import java.io.Serializable
 

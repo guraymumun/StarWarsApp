@@ -1,7 +1,9 @@
-package com.example.starwarsapp
+package com.example.starwarsapp.di
 
-import com.example.starwarsapp.model.network.services.PeopleService
-import com.example.starwarsapp.model.network.services.PlanetService
+import com.example.starwarsapp.data.remote.service.PeopleService
+import com.example.starwarsapp.data.remote.service.PlanetService
+import com.example.starwarsapp.domain.datasource.PeopleDataSource
+import com.example.starwarsapp.domain.datasource.PlanetDataSource
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -21,9 +23,9 @@ fun networkModule(host: String) = module {
     factory {
         OkHttpClient.Builder()
             .addInterceptor(get<HttpLoggingInterceptor>(named("httpLoggingInterceptor")))
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
             .build()
     }
 
@@ -33,7 +35,6 @@ fun networkModule(host: String) = module {
             .setLenient()
             .create()
     }
-
 
     single {
         Retrofit.Builder()

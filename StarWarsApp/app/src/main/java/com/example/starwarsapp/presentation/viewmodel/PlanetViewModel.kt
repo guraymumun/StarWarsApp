@@ -1,4 +1,4 @@
-package com.example.starwarsapp.presentation.ui.viewmodel
+package com.example.starwarsapp.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

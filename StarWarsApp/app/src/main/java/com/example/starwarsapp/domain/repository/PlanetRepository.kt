@@ -1,9 +1,10 @@
-package com.example.starwarsapp
+package com.example.starwarsapp.domain.repository
 
 import androidx.lifecycle.LiveData
 import com.example.starwarsapp.data.remote.dto.PlanetDTO
-import com.example.starwarsapp.data.remote.utils.ApiResponse
-import com.example.starwarsapp.data.remote.utils.NetworkBoundResource
+import com.example.starwarsapp.data.remote.util.ApiResponse
+import com.example.starwarsapp.data.remote.util.NetworkBoundResource
+import com.example.starwarsapp.domain.datasource.PlanetDataSource
 import retrofit2.Response
 
 
